@@ -1,0 +1,46 @@
+services:
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    env_file:
+      - .env
+    command: server --console-address ":${PORT_MINIO_1}" /data/
+    environment:
+      MINIO_ROOT_USER: ${MINIO_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_PASSWORD}
+      MINIO_BROWSER_REDIRECT_URL: ${MINIO_BROWSER_REDIRECT_URL}
+      MINIO_DOMAIN: ${MINIO_DOMAIN}
+    restart: always
+    volumes:
+      - minio_storage:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://${HOST_MINIO}:${PORT_MINIO_2}/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    networks:
+      - net
+  
+  nginx:
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+    container_name: nginx_minio
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "${NGINX_HOST_PORT}:${NGINX_CONTAINER_PORT}"
+      - "${NGINX_HOST_SSL_PORT}:${NGINX_CONTAINER_SSL_PORT}"
+    depends_on:
+      - minio
+    networks:
+      - net
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+
+volumes:
+  minio_storage:
+
+networks:
+  net:

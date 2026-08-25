@@ -1,0 +1,35 @@
+services:
+  db:
+    container_name: db
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_DB=${NAME_DB}
+      - POSTGRES_USER=${USER_DB}
+      - POSTGRES_PASSWORD=${PASSWORD_DB}
+    ports:
+      - "${EXTERNAL_PORT_DB}:${INNER_PORT_DB}"
+    volumes:
+      - shop_bot_db:/var/lib/postgresql/data
+
+  bot_shop:
+    container_name: bot_shop
+    build:
+      context: .
+    env_file:
+      - .env
+    command: sh -c "
+      chmod +x ./wait-for-it.sh &&
+      ./wait-for-it.sh db:${INNER_PORT_DB} --strict &&
+      poetry run alembic upgrade head &&
+      poetry run filling_category_excel &&
+      poetry run filling_product_excel &&
+      poetry run starry-628-shop"
+    restart: always
+    depends_on:
+      - db
+    volumes:
+      - ./excel_docs:/app/excel_docs
+
+volumes:
+  shop_bot_db:
