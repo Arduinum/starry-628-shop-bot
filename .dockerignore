@@ -1,0 +1,23 @@
+# environments
+*venv
+venv*
+.env
+.env.example
+.env-local
+.env-dev
+.env-prod
+
+# IDE files
+.idea/*
+.vscode/*
+
+# byte-compiled
+**/__pycache__
+*.pyc
+
+# directory for temporary storage of files
+/tmp/
+
+# files
+test_file/
+test*.jpg
