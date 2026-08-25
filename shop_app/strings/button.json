@@ -1,0 +1,41 @@
+{
+    "main_menu": "🏠 Меню",
+    "delete": "❌ Удалить",
+    "cancel_delete": "Отменить удаление",
+    "categories": "Категории",
+    "categories_back": "🔙 Категории",
+    "category_back": "🔙 Категория",
+    "product_back": "🔙 Продукт",
+    "add_category": "🆕 Добавить категорию",
+    "add_product": "🆕 Добавить продукт",
+    "delete_category": "❌ Удалить категорию",
+    "delete_product": "❌ Удалить продукт",
+    "back": "🔙",
+    "left": "⬅️",
+    "right": "➡️",
+    "plug": "⏹",
+    "pay_star": "⭐️ Купить",
+    "edit": "✏️ Редактировать",
+    "edit_field_button": {
+        "edit": "✏️ Изменить",
+        "fields": {
+            "title": "название",
+            "is_active": "активен",
+            "description": "описание",
+            "price": "цена",
+            "file": "файл",
+            "category_id": "айди категории"
+        }
+    },
+    "create_field_button": {
+        "create": "🆕 Добавить",
+        "fields": {
+            "title": "название",
+            "is_active": "активен",
+            "description": "описание",
+            "price": "цена",
+            "file": "файл",
+            "category_id": "айди категории"
+        }
+    }
+}
