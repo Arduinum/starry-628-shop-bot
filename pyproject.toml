@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "starry-628-shop-bot"
+version = "0.1.0"
+description = ""
+authors = ["Arduinum <message.chaos628@gmail.com>"]
+readme = "README.md"
+packages = [{ include = "starry-628-shop" }]
+
+[tool.poetry.dependencies]
+python = "3.12.0"
+aiogram = "3.11.0"
+asyncpg = "0.29.0"
+sqlalchemy = "2.0.34"
+alembic = "1.13.2"
+pydantic-settings = "2.4.0"
+faker = "28.4.1"
+boto3 = {extras = ["crt"], version = "^1.35.60"}
+pandas = "^2.2.3"
+openpyxl = "^3.1.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+starry-628-shop = "starry-628-shop.main:main"
+filling_fake_data = "starry-628-shop.filling_fake_data:main"
+filling_category_excel = "starry-628-shop.filling_db_excel:category_main"
+filling_product_excel = "starry-628-shop.filling_db_excel:product_main"
